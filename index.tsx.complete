@@ -20,8 +20,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Blank Application</title>
-        <meta name="description" content="Blank application" />
+        <title>Data Protection Coach</title>
+        <meta name="description" content="Data Protection Coach: Your coach on staying GDPR compliant in the workplace!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center">
