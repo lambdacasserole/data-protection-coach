@@ -1,12 +1,16 @@
 import Head from "next/head";
+import { Favicon } from "~/components/Favicon";
 
+/**
+ * The website homepage.
+ */
 export default function Home() {
   return (
     <>
       <Head>
         <title>Blank Application</title>
         <meta name="description" content="Blank application" />
-        <link rel="icon" href="/favicon.ico" />
+        <Favicon />
       </Head>
       <main className="flex min-h-screen flex-col items-center">
         <div className="container flex flex-col items-center justify-center gap-6 pt-12">
