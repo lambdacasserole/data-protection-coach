@@ -1,0 +1,70 @@
+import { PromptType } from "@prisma/client";
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import { Button } from "~/components/Button";
+import { Spinner } from "~/components/Spinner";
+import { TextField } from "~/components/TextField";
+import { api } from "~/utils/api";
+
+export default function Home() {
+  const [promptType, setPromptType] = useState<PromptType>(
+    PromptType.BUSINESS_SECTOR,
+  );
+  const [prompt, setPrompt] = useState<string>("");
+  const [result, setResult] = useState<string | null>(null);
+
+  const submitQuery = api.query.submitQuery.useMutation({
+    onSuccess: (result) => setResult(result),
+  });
+  return (
+    <>
+      <Head>
+        <title>Blank Application</title>
+        <meta name="description" content="Blank application" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className="flex min-h-screen flex-col items-center">
+        <div className="container flex flex-col items-center justify-center gap-6 pt-12">
+          <Image src="/logo.svg" height={128} width={306} alt="Logo"/>
+          <div>What do I need to know regarding the GDPR and my...</div>
+          <div className="flex gap-6">
+            <Button
+              onClick={() => setPromptType(PromptType.BUSINESS_SECTOR)}
+              text="Business sector"
+              checked={promptType === PromptType.BUSINESS_SECTOR}
+            />
+            <Button
+              onClick={() => setPromptType(PromptType.DATABASE_CONTENTS)}
+              text="Database contents"
+              checked={promptType === PromptType.DATABASE_CONTENTS}
+            />
+            <Button
+              onClick={() => setPromptType(PromptType.JOB_ROLE)}
+              text="Job role"
+              checked={promptType === PromptType.JOB_ROLE}
+            />
+          </div>
+          <div>Which is...</div>
+          <TextField onChange={(e) => setPrompt(e.target.value)} />
+          <Button
+            onClick={() => submitQuery.mutate({ promptType, prompt })}
+            text="What do I need to know?"
+            loading={submitQuery.isLoading}
+          />
+          {(result !== null || submitQuery.isLoading) && (
+            <div className="w-[512px] rounded border border-neutral-300 bg-neutral-50 p-4">
+              {submitQuery.isLoading ? (
+                <div className="flex w-full place-content-center items-center">
+                  <Spinner />
+                </div>
+              ) : (
+                result
+              )}
+            </div>
+          )}
+        </div>
+      </main>
+    </>
+  );
+}

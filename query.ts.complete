@@ -1,0 +1,43 @@
+import { PromptType } from "@prisma/client";
+import { z } from "zod";
+
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { askChatGpt } from "~/utils/askChatGpt";
+
+export const queryRouter = createTRPCRouter({
+  submitQuery: publicProcedure
+    .input(
+      z.object({
+        prompt: z.string(),
+        promptType: z.nativeEnum(PromptType),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      let chatGptResponse = "";
+      switch (input.promptType) {
+        case PromptType.BUSINESS_SECTOR:
+          chatGptResponse = await askChatGpt(
+            `Summarise in 2 sentences or fewer everything I need to know about GDPR compliance as a business working in the following sector: ${input.prompt}`,
+          );
+          break;
+        case PromptType.DATABASE_CONTENTS:
+          chatGptResponse = await askChatGpt(
+            `Summarise in 2 sentences or fewer everything I need to know about GDPR compliance as an employee working with a database containing the following customer information: ${input.prompt}`,
+          );
+          break;
+        case PromptType.JOB_ROLE:
+          chatGptResponse = await askChatGpt(
+            `Summarise in 2 sentences or fewer everything I need to know about GDPR compliance as a worker with the following role: ${input.prompt}`,
+          );
+          break;
+      }
+      await ctx.db.query.create({
+        data: {
+          prompt: input.prompt,
+          response: chatGptResponse,
+          promptType: input.promptType,
+        },
+      });
+      return chatGptResponse;
+    }),
+});
