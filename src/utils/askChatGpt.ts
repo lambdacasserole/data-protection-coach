@@ -8,7 +8,7 @@ import { env } from "~/env";
  *
  * @returns the model output
  */
-export async function getChatCompletion(message: string) {
+export async function askChatGpt(message: string) {
   // Initialize OpenAI API client.
   const params: OpenAI.Chat.ChatCompletionCreateParams = {
     messages: [{ role: "user", content: message }],
@@ -19,5 +19,6 @@ export async function getChatCompletion(message: string) {
   });
 
   // Return response.
-  return openai.chat.completions.create(params);
+  const completion = await openai.chat.completions.create(params);
+  return completion.choices[0]?.message.content ?? "";
 }
