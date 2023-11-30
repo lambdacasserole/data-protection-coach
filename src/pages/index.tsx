@@ -9,7 +9,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center">
-        <div className="container flex flex-col items-center justify-center">
+        <div className="container flex flex-col items-center justify-center gap-6 pt-12">
           <div className="mt-12 rounded border border-neutral-400 bg-neutral-50 px-6 py-5 font-mono text-neutral-400">
             There&apos;s nothing here.
           </div>
