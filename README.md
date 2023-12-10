@@ -79,3 +79,7 @@ npm start
 ```
 
 This will start the application, and you can access it by navigating to [http://localhost:3000](http://localhost:3000) in your web browser.
+
+## Deploying on Vercel (Optional)
+
+If you wish to deploy your project on Vercel, an easy-to-use platform for hosting web applications, follow this [Vercel deployment tutorial](https://vercel.com/docs/platform/deployments). If you're in class, there's no need to do this unless you actually want to take things further outside the classroom by opening your app up to real users!
