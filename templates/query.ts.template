@@ -1,0 +1,52 @@
+import { PromptType } from "@prisma/client";
+import { z } from "zod";
+
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { askChatGpt } from "~/utils/askChatGpt";
+
+/**
+ * This is the website backend. Here's where we do the data processing and talking to ChatGPT.
+ */
+export const queryRouter = createTRPCRouter({
+  submitQuery: publicProcedure
+    .input(
+      z.object({
+        // These are sent from our web application frontend.
+        prompt: z.string(), // The prompt our user entered in the text box.
+        promptType: z.nativeEnum(PromptType), // The type of prompt they had selected ($promptType1, $promptType2, or $promptType3).
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+
+      // Simply ask ChatGPT a question depending on the prompt type we had selected. Include the prompt from the frontend.
+      let chatGptResponse = "";
+      switch (input.promptType) {
+        case PromptType.$promptTypeEnum1:
+          chatGptResponse = await askChatGpt(
+            `Summarise in 2 sentences or fewer everything I need to know about $serviceTopic based on the following $promptType1: $${input.prompt}`,
+          );
+          break;
+        case PromptType.$promptTypeEnum2:
+          chatGptResponse = await askChatGpt(
+            `Summarise in 2 sentences or fewer everything I need to know about $serviceTopic based on the following $promptType2: $${input.prompt}`,
+          );
+          break;
+        case PromptType.$promptTypeEnum3:
+          chatGptResponse = await askChatGpt(
+            `Summarise in 2 sentences or fewer everything I need to know about $serviceTopic based on the following $promptType3: $${input.prompt}`,
+          );
+          break;
+      }
+
+      // Put our prompt and the response from ChatGPT in the database (important for analytics!).
+      await ctx.db.query.create({
+        data: {
+          prompt: input.prompt,
+          response: chatGptResponse,
+          promptType: input.promptType,
+        },
+      });
+
+      return chatGptResponse;
+    }),
+});

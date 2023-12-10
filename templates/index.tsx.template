@@ -1,0 +1,113 @@
+import { PromptType } from "@prisma/client";
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import { CheckButton } from "~/components/CheckButton";
+import { Favicon } from "~/components/Favicon";
+import { Spinner } from "~/components/Spinner";
+import { TextField } from "~/components/TextField";
+import { api } from "~/utils/api";
+
+/**
+ * The website frontend (the page the user interacts with).
+ */
+export default function Home() {
+  // Keep a record of our currently selected prompt type (which button is checked on the frontend).
+  const [promptType, setPromptType] = useState<PromptType>(
+    PromptType.$promptTypeEnum1,
+  );
+
+  // Store our prompt (in the text box).
+  const [prompt, setPrompt] = useState<string>("");
+
+  // Store the result we get back from ChatGPT.
+  const [result, setResult] = useState<string | null>(null);
+
+  // This just lets us talk to our web application's backend.
+  const submitQuery = api.query.submitQuery.useMutation({
+    onSuccess: (result) => setResult(result),
+  });
+
+  // This is the contents of the page itself.
+  return (
+    <>
+      <Head>
+        <title>$serviceName</title>
+        <meta
+          name="description"
+          content="$serviceName: $serviceDescription"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap"
+          rel="stylesheet"
+        />
+        {/* Uncomment this if you want to give an icon to your app. */}
+        {/* <link rel="icon" href="/favicon.ico" /> */}
+        {/* <Favicon /> */}
+      </Head>
+      <main className="flex min-h-screen flex-col items-center">
+        <div className="container flex flex-col items-center justify-center gap-6 pt-12">
+          {/* Uncomment this if you want to give a logo to your app. */}
+          {/* <Image src="/logo.svg" height={128} width={306} alt="Logo" /> */}
+          <h1 className="text-4xl" style={{ fontFamily: "Comfortaa" }}>$serviceName</h1>
+
+          {/* Introductory text. */}
+          <div>What do I need to know regarding $serviceTopic and my...</div>
+
+          {/* Our row of prompt type buttons (business sector, database contents and job role). */}
+          <div className="flex gap-6">
+            <CheckButton
+              onClick={() => setPromptType(PromptType.$promptTypeEnum1)}
+              text="$promptType1"
+              checked={promptType === PromptType.$promptTypeEnum1}
+            />
+            <CheckButton
+              onClick={() => setPromptType(PromptType.$promptTypeEnum2)}
+              text="$promptType2"
+              checked={promptType === PromptType.$promptTypeEnum2}
+            />
+            <CheckButton
+              onClick={() => setPromptType(PromptType.$promptTypeEnum3)}
+              text="$promptType3"
+              checked={promptType === PromptType.$promptTypeEnum3}
+            />
+          </div>
+
+          {/* Some more text. */}
+          <div>Which is...</div>
+
+          {/* The text field into which our user enters their prompt. */}
+          <TextField onChange={(value) => setPrompt(value)} />
+
+          {/* The submit button! */}
+          <CheckButton
+            onClick={() => submitQuery.mutate({ promptType, prompt })}
+            text="What do I need to know?"
+            loading={submitQuery.isLoading}
+          />
+
+          {/* The result box. We only show this once the submit button is clicked. */}
+          {(result !== null || submitQuery.isLoading) && (
+            <div className="w-[512px] rounded border border-neutral-300 bg-neutral-50 p-4">
+              {submitQuery.isLoading ? (
+                <div className="flex w-full place-content-center items-center">
+                  {/* Show the loading spinner if we're still waiting for a response. */}
+                  <Spinner />
+                </div>
+              ) : (
+                result
+              )}
+            </div>
+          )}
+        </div>
+      </main>
+    </>
+  );
+}
