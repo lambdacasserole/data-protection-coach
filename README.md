@@ -83,3 +83,11 @@ This will start the application, and you can access it by navigating to [http://
 ## Deploying on Vercel (Optional)
 
 If you wish to deploy your project on Vercel, an easy-to-use platform for hosting web applications, follow this [Vercel deployment tutorial](https://vercel.com/docs/platform/deployments). If you're in class, there's no need to do this unless you actually want to take things further outside the classroom by opening your app up to real users!
+
+## Acknowledgements
+
+This app is built on the awesome [T3 stack](https://create.t3.gg/).
+
+## Copyright and License
+
+Copyright 2023 Saul Johnson. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-blog-post/blob/gh-pages/LICENSE) license.
