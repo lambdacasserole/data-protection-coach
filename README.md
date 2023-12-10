@@ -80,6 +80,16 @@ npm start
 
 This will start the application, and you can access it by navigating to [http://localhost:3000](http://localhost:3000) in your web browser.
 
+## Making the Project Yours
+
+Included in this project is `quickstart.py`, a script that will allow you to customise the app to your chosen problem domain quickly and easily. To get started, run:
+
+```bash
+python3 quickstart.py
+```
+
+The script will guide you through the rest of the process.
+
 ## Deploying on Vercel (Optional)
 
 If you wish to deploy your project on Vercel, an easy-to-use platform for hosting web applications, follow this [Vercel deployment tutorial](https://vercel.com/docs/platform/deployments). If you're in class, there's no need to do this unless you actually want to take things further outside the classroom by opening your app up to real users!
