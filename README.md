@@ -1,28 +1,81 @@
 # Data Protection Coach
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A project implementing a simple AI startup idea to help businesses achieve GDPR compliance. Used for my talk on startup building.
 
-## What's next? How do I make an app with this?
+![Screenshot](screenshot.png)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Prerequisites
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Before you begin, ensure you have met the following requirements:
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- [Node.js](https://nodejs.org/) installed on your machine. The project has been developed and tested with Node.js version 18.6.0. You can download the latest version of Node.js from [https://nodejs.org/](https://nodejs.org/).
 
-## Learn More
+### Verifying Node.js Installation
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+To check if Node.js is installed, open a command prompt or terminal window and run the following commands:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+node --version
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+This should display the installed Node.js version. Additionally, you can check the npm version:
 
-## How do I deploy this?
+```bash
+npm --version
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Make sure both commands return valid version numbers.
+
+### Installing Visual Studio Code (Recommended)
+
+Visual Studio Code is the recommended code editor for this project. Follow these steps to install it:
+
+1. Visit the [Visual Studio Code website](https://code.visualstudio.com/).
+2. Download the installer for your operating system (Windows, macOS, or Linux).
+3. Run the installer and follow the on-screen instructions.
+4. After installation, open Visual Studio Code.
+
+## Installing Dependencies
+
+Once Node.js is installed, navigate to the project's root directory using the command line and run the following command to install the project dependencies:
+
+```bash
+npm install
+```
+
+This will download and install the necessary packages specified in the `package.json` file.
+
+## Setting Up Environment Variables
+
+Your app needs to be able to connect to a database as well as the OpenAI API in order to function. If you're in class, your teacher can provide these to you if you don't have them to hand. Otherwise you'll need to set up a database (e.g. using [Railway](https://docs.railway.app/guides/mysql)) and [register your own OpenAI API key](https://platform.openai.com/docs/quickstart?context=python).
+
+1. **Database Connection (DATABASE_URL):**
+   - Copy the file called `.env.example` a new file named `.env` in the root directory of your project.
+   - Inside the `.env` file, add the following line and replace `<YOUR_DATABASE_URL>` with the actual connection URL for your database:
+
+     ```env
+     DATABASE_URL="<YOUR_DATABASE_URL>"
+     ```
+
+   - Save the `.env` file.
+
+2. **OpenAI API Key (OPENAI_API_KEY):**
+   - This project makes use of the OpenAI API, which requires an API key. To install it, add another line to your `.env` file:
+
+     ```env
+     OPENAI_API_KEY="<YOUR_API_KEY>"
+     ```
+
+   - Replace `<YOUR_API_KEY>` with your actual OpenAI API key.
+
+   - Save the `.env` file.
+
+## Running the Project
+
+After installing the dependencies, you can run the project using the following command:
+
+```bash
+npm start
+```
+
+This will start the application, and you can access it by navigating to [http://localhost:3000](http://localhost:3000) in your web browser.
