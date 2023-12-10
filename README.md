@@ -2,7 +2,7 @@
 
 A project implementing a simple AI startup idea to help businesses achieve GDPR compliance. Used for my talk on startup building.
 
-![Screenshot](screenshot.png)
+![Logo](public/logo.svg)
 
 ## Prerequisites
 
