@@ -1,8 +1,11 @@
-import { type FC } from "react";
+import { type HTMLAttributes, type FC } from "react";
 
-export const Spinner: FC = () => {
+/**
+ * An SVG-based spinner component.
+ */
+export const Spinner: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   return (
-    <div role="status">
+    <div role="status" {...props}>
       <svg
         aria-hidden="true"
         className="inline h-8 w-8 animate-spin fill-white text-blue-200 dark:fill-gray-300 dark:text-gray-600"

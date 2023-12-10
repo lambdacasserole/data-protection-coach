@@ -2,7 +2,7 @@ import { PromptType } from "@prisma/client";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "~/components/Button";
+import { CheckButton } from "~/components/CheckButton";
 import { Favicon } from "~/components/Favicon";
 import { Spinner } from "~/components/Spinner";
 import { TextField } from "~/components/TextField";
@@ -50,17 +50,17 @@ export default function Home() {
 
           {/* Our row of prompt type buttons (business sector, database contents and job role). */}
           <div className="flex gap-6">
-            <Button
+            <CheckButton
               onClick={() => setPromptType(PromptType.BUSINESS_SECTOR)}
               text="Business sector"
               checked={promptType === PromptType.BUSINESS_SECTOR}
             />
-            <Button
+            <CheckButton
               onClick={() => setPromptType(PromptType.DATABASE_CONTENTS)}
               text="Database contents"
               checked={promptType === PromptType.DATABASE_CONTENTS}
             />
-            <Button
+            <CheckButton
               onClick={() => setPromptType(PromptType.JOB_ROLE)}
               text="Job role"
               checked={promptType === PromptType.JOB_ROLE}
@@ -71,10 +71,10 @@ export default function Home() {
           <div>Which is...</div>
 
           {/* The text field into which our user enters their prompt. */}
-          <TextField onChange={(e) => setPrompt(e.target.value)} />
+          <TextField onChange={(value) => setPrompt(value)} />
 
           {/* The submit button! */}
-          <Button
+          <CheckButton
             onClick={() => submitQuery.mutate({ promptType, prompt })}
             text="What do I need to know?"
             loading={submitQuery.isLoading}

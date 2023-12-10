@@ -1,12 +1,26 @@
 import { type HTMLAttributes, type FC } from "react";
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface CheckButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  /**
+   * Whether or not this button is checked.
+   */
   checked?: boolean;
+
+  /**
+   * The text to display in this button.
+   */
   text: string;
+
+  /**
+   * Whether or not this button is currently in a loading state.
+   */
   loading?: boolean;
 }
 
-export const Button: FC<ButtonProps> = ({
+/**
+ * A button component that supports a checked/unchecked state.
+ */
+export const CheckButton: FC<CheckButtonProps> = ({
   checked,
   text,
   loading,
