@@ -3,6 +3,28 @@ from typing import List, Optional
 from string import Template
 
 
+def print_title_card ():
+    """ Prints the title card for the utility.
+    """
+    print('\n'.join([
+        "                          ____        _      _        _             _    ",
+        "     /\                  / __ \      (_)    | |      | |           | |   ",
+        "    /  \   _ __  _ __   | |  | |_   _ _  ___| | _____| |_ __ _ _ __| |_  ",
+        "   / /\ \ | '_ \| '_ \  | |  | | | | | |/ __| |/ / __| __/ _` | '__| __| ",
+        "  / ____ \| |_) | |_) | | |__| | |_| | | (__|   <\__ \ || (_| | |  | |_  ",
+        " /_/    \_\ .__/| .__/   \___\_\\__,_|_|\___|_|\_\___/\__\__,_|_|   \__| ",
+        "          | |   | |                                                      ",
+        "          |_|   |_|        Let's get your AI-powered app off the ground! ",
+        "                                            Utllity by Saul Johnson v1.0 ",
+        "                                                                         ",
+        "This utility will quickly scaffold your AI-powered web app to get you up ",
+        "and running right away.                                                  ",
+        "                                                                         ",
+        "Answer the following questions to get started:                           ",
+        "                                                                         ",
+    ]))
+
+
 def ask(prompt: str, allowed: Optional[List[str]] = None):
     """ Asks a question until one of an optional approved list of options is entered.
     Args:
@@ -61,6 +83,9 @@ def enumize(name: str):
     """
     return name.replace(' ', '_').upper()
 
+
+# Show title card.
+print_title_card()
 
 # Ask for service information.
 service_name = ask("What do you want to call your app?")
