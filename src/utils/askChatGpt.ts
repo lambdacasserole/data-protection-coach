@@ -12,7 +12,7 @@ export async function askChatGpt(message: string) {
   // Initialize OpenAI API client.
   const params: OpenAI.Chat.ChatCompletionCreateParams = {
     messages: [{ role: "user", content: message }],
-    model: "gpt-4",
+    model: "gpt-4o",
   };
   const openai = new OpenAI({
     apiKey: env.OPENAI_API_KEY,
