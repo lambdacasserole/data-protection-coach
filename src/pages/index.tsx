@@ -1,4 +1,3 @@
-import { PromptType } from "@prisma/client";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
@@ -7,6 +6,7 @@ import { Favicon } from "~/components/Favicon";
 import { Spinner } from "~/components/Spinner";
 import { TextField } from "~/components/TextField";
 import { api } from "~/utils/api";
+import { PromptType } from "~/utils/promptType";
 
 /**
  * The website frontend (the page the user interacts with).

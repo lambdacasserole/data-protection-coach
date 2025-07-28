@@ -45,3 +45,6 @@ yarn-error.log*
 /plugins
 /metabase.jar
 /metabase.*.db
+
+# Database file
+*.sqlite3

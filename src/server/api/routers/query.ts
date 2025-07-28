@@ -1,8 +1,10 @@
-import { PromptType } from "@prisma/client";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { askChatGpt } from "~/utils/askChatGpt";
+import { PromptType } from "~/utils/promptType";
+
+
 
 /**
  * This is the website backend. Here's where we do the data processing and talking to ChatGPT.
@@ -41,7 +43,7 @@ export const queryRouter = createTRPCRouter({
       // Put our prompt and the response from ChatGPT in the database (important for analytics!).
       await ctx.db.query.create({
         data: {
-          prompt: input.prompt,
+          prompt: input.prompt ?? "",
           response: chatGptResponse,
           promptType: input.promptType,
         },
